@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Signed but Not Enforced</title>
-<meta name="description" content="A procurement diagnostic: 31 weak spots where contract value leaks, from intake to invoice, with impacts and potential solutions.">
+<meta name="description" content="A procurement diagnostic: 30 weak spots where contract value leaks, from intake to invoice, with impacts, potential solutions, and a survey to score your own process.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=PT+Serif:wght@400;700&amp;display=swap">
@@ -43,6 +43,12 @@ span[style*="border-radius: 999px"]{white-space:nowrap}
 [style*="grid-template-columns: repeat(3"] [style*="font-size: 64px"]{font-size:44px!important}
 [style*="padding: 28px"]{padding:20px!important}
 }
+.cta{display:inline-block;font-size:16px;font-weight:600;text-decoration:none;border-radius:8px;padding:13px 22px;box-sizing:border-box}
+.cta-gold{background:#D2AE68;color:#1B1B18;border:1px solid #D2AE68}
+.cta-gold:hover{background:#E0C285;color:#1B1B18}
+.cta-ghost{background:transparent;color:#FBFAF6;border:1px solid #6B6A62}
+.cta-ghost:hover{border-color:#D2AE68;color:#FBFAF6}
+@media (max-width:760px){.callout{padding:20px!important}.endcta{padding:24px!important}}
 </style>
 </head><body>
 <div style="width: 100%; background: #F5F2EA">
@@ -51,79 +57,97 @@ span[style*="border-radius: 999px"]{white-space:nowrap}
 <header style="background: #1B1B18; color: #FBFAF6; padding: 72px 72px 56px 72px; box-sizing: border-box; display: flex; flex-direction: column; gap: 20px">
 <div style="font-size: 14px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #D2AE68">A procurement diagnostic</div>
 <h1 style="margin: 0; font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 92px; line-height: 1.0; letter-spacing: -0.02em; max-width: 760px">Signed but Not Enforced</h1>
-<p style="margin: 0; font-size: 24px; line-height: 1.4; color: #D9D6CB; max-width: 840px">31 weak spots where contract value leaks, from intake to invoice, and what each one causes. Most of it happens at the handoffs between systems and teams.</p>
+<p style="margin: 0; font-size: 24px; line-height: 1.4; color: #D9D6CB; max-width: 840px">30 weak spots where contract value leaks, from intake to invoice, and what each one causes. Most of it happens at the handoffs between systems and teams.</p>
 <p style="margin: 0; font-size: 17px; line-height: 1.5; color: #D9D6CB; opacity: 0.8; max-width: 840px">This review covers system and process limits. The operating model around them sits outside its scope.</p>
 <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 24px">
 <div style="background: #2A2A25; border-radius: 16px; padding: 24px; box-sizing: border-box">
-<div style="font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 64px; line-height: 1.0; color: #D2AE68">31</div>
+<div style="font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 64px; line-height: 1.0; color: #D2AE68">30</div>
 <div style="margin-top: 10px; font-size: 17px; line-height: 1.35; color: #D9D6CB">weak spots documented in the analysis</div>
 </div>
 <div style="background: #2A2A25; border-radius: 16px; padding: 24px; box-sizing: border-box">
-<div style="font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 64px; line-height: 1.0; color: #D2AE68">4</div>
-<div style="margin-top: 10px; font-size: 17px; line-height: 1.35; color: #D9D6CB">areas: technology, data, process, and change management</div>
+<div style="font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 64px; line-height: 1.0; color: #D2AE68">5</div>
+<div style="margin-top: 10px; font-size: 17px; line-height: 1.35; color: #D9D6CB">areas, from creation and execution to adoption and trust</div>
 </div>
 <div style="background: #2A2A25; border-radius: 16px; padding: 24px; box-sizing: border-box">
-<div style="font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 64px; line-height: 1.0; color: #D2AE68">13</div>
-<div style="margin-top: 10px; font-size: 17px; line-height: 1.35; color: #D9D6CB">weak spots whose main impact is a slower cycle</div>
+<div style="font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 64px; line-height: 1.0; color: #D2AE68">55%</div>
+<div style="margin-top: 10px; font-size: 17px; line-height: 1.35; color: #D9D6CB">of the weight sits after signature and in integration</div>
+</div>
+</div>
+<div class="callout" style="margin-top: 8px; border: 1px solid #4A473F; border-radius: 16px; padding: 24px 28px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px">
+<div style="max-width: 600px">
+<div style="font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 26px; line-height: 1.25; color: #FBFAF6">How enforced are your contracts?</div>
+<p style="margin: 8px 0 0 0; font-size: 16px; line-height: 1.5; color: #D9D6CB">Score your own process against the 30 weak spots in about 5 minutes. You can start now, but reading the article first gives you better context for the questions.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a href="survey.html" class="cta cta-gold">Take the survey</a>
+<a href="#shape" class="cta cta-ghost">Read the article first</a>
 </div>
 </div>
 </header>
 
-<section style="padding: 64px 72px 0 72px; box-sizing: border-box">
+<section id="shape" style="scroll-margin-top: 16px; padding: 64px 72px 0 72px; box-sizing: border-box">
 <div style="font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #3F6488">The shape of the problem</div>
-<h2 style="margin: 8px 0 12px 0; font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 38px; line-height: 1.15">31 weak spots, and the biggest group slows the work down</h2>
-<p style="margin: 0 0 24px 0; font-size: 18px; line-height: 1.5; color: #6B6A62">Each weak spot is counted once, under the area it belongs to and the impact it mainly causes.</p>
+<h2 style="margin: 8px 0 12px 0; font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 38px; line-height: 1.15">30 weak spots, and the biggest share of the weight sits after signature</h2>
+<p style="margin: 0 0 24px 0; font-size: 18px; line-height: 1.5; color: #6B6A62">Each weak spot carries a weight for how much it hurts contract performance. The weights add up to 100%, and the survey uses them to score your process.</p>
 <details style="margin: 0 0 24px 0; background: #FBFAF6; border: 1px solid #E3E0D5; border-radius: 16px">
-<summary style="padding: 14px 20px; min-height: 44px; box-sizing: border-box; cursor: pointer; font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 18px; color: #3F6488">My take on the 31 weak spots</summary>
+<summary style="padding: 14px 20px; min-height: 44px; box-sizing: border-box; cursor: pointer; font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 18px; color: #3F6488">My take on the 30 weak spots</summary>
 <div style="padding: 4px 24px 12px 24px">
-<p style="margin: 0 0 14px 0; font-size: 17px; line-height: 1.55; color: #1B1B18">I expected most weak spots to sit inside the contract tool, but the list says otherwise. Technology has the most weak spots, and many of them are about connections to other systems, not features inside the tool. When I reviewed contracting, sourcing, supplier management, the platform, and procure to pay side by side, the weak spots kept showing up where one system had to talk to the next.</p>
-<p style="margin: 0 0 14px 0; font-size: 17px; line-height: 1.55; color: #1B1B18">A slower cycle is the most common impact, 13 of the 31 in my grouping. Speed is what the business feels first. A sourcing manager mostly notices that renewals and approvals take longer than they should, and starts working around the system.</p>
-<p style="margin: 0 0 14px 0; font-size: 17px; line-height: 1.55; color: #1B1B18">The smaller groups cost more per weak spot. Savings leakage and off-contract spend only became clear to me when I followed the money. Missed renewals alone cost a few million dollars a year. Those weak spots are quiet, so they tend to get fixed last.</p>
+<p style="margin: 0 0 14px 0; font-size: 17px; line-height: 1.55; color: #1B1B18">I expected most weak spots to sit inside the contract tool, but the list says otherwise. Many of them are about connections to other systems, not features inside the tool. When I reviewed contracting, sourcing, supplier management, the platform, and procure to pay side by side, the weak spots kept showing up where one system had to talk to the next.</p>
+<p style="margin: 0 0 14px 0; font-size: 17px; line-height: 1.55; color: #1B1B18">Speed is what the business feels first. A sourcing manager mostly notices that renewals and approvals take longer than they should, and starts working around the system. Slow cycles are real, but they are not where most of the money goes, so they carry less weight here.</p>
+<p style="margin: 0 0 14px 0; font-size: 17px; line-height: 1.55; color: #1B1B18">The weak spots after signature cost more. Savings leakage and off-contract spend only became clear to me when I followed the money. Missed renewals alone cost a few million dollars a year. Those weak spots are quiet, so they tend to get fixed last.</p>
 </div>
 </details>
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: start">
 
 <div style="background: #FBFAF6; border: 1px solid #E3E0D5; border-radius: 16px; padding: 28px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
-<h3 style="margin: 0 0 4px 0; font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 22px">By area</h3>
+<h3 style="margin: 0 0 4px 0; font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 22px">Weight by area</h3>
 <div style="display: flex; flex-direction: column; gap: 8px">
-<div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 16px"><span>Technology</span><strong style="font-family: 'PT Serif', Georgia, serif; font-size: 18px">12</strong></div>
-<div aria-hidden="true" style="height: 14px; border-radius: 7px; background: #E3E0D5"><div style="width: 100%; height: 14px; border-radius: 7px; background: #5C82A8"></div></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 16px"><span>Post Signature (Performance)</span><strong style="font-family: 'PT Serif', Georgia, serif; font-size: 18px">30%</strong></div>
+<div aria-hidden="true" style="height: 14px; border-radius: 7px; background: #E3E0D5"><div style="width: 100.00%; height: 14px; border-radius: 7px; background: #5C82A8"></div></div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 8px">
-<div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 16px"><span>Process</span><strong style="font-family: 'PT Serif', Georgia, serif; font-size: 18px">10</strong></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 16px"><span>Integration</span><strong style="font-family: 'PT Serif', Georgia, serif; font-size: 18px">25%</strong></div>
 <div aria-hidden="true" style="height: 14px; border-radius: 7px; background: #E3E0D5"><div style="width: 83.33%; height: 14px; border-radius: 7px; background: #5C82A8"></div></div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 8px">
-<div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 16px"><span>Data</span><strong style="font-family: 'PT Serif', Georgia, serif; font-size: 18px">5</strong></div>
-<div aria-hidden="true" style="height: 14px; border-radius: 7px; background: #E3E0D5"><div style="width: 41.67%; height: 14px; border-radius: 7px; background: #5C82A8"></div></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 16px"><span>Data and repository</span><strong style="font-family: 'PT Serif', Georgia, serif; font-size: 18px">20%</strong></div>
+<div aria-hidden="true" style="height: 14px; border-radius: 7px; background: #E3E0D5"><div style="width: 66.67%; height: 14px; border-radius: 7px; background: #5C82A8"></div></div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 8px">
-<div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 16px"><span>Change management</span><strong style="font-family: 'PT Serif', Georgia, serif; font-size: 18px">4</strong></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 16px"><span>Creation &amp; Execution</span><strong style="font-family: 'PT Serif', Georgia, serif; font-size: 18px">15%</strong></div>
+<div aria-hidden="true" style="height: 14px; border-radius: 7px; background: #E3E0D5"><div style="width: 50.00%; height: 14px; border-radius: 7px; background: #5C82A8"></div></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 16px"><span>Adoption and trust</span><strong style="font-family: 'PT Serif', Georgia, serif; font-size: 18px">10%</strong></div>
 <div aria-hidden="true" style="height: 14px; border-radius: 7px; background: #E3E0D5"><div style="width: 33.33%; height: 14px; border-radius: 7px; background: #5C82A8"></div></div>
 </div>
 </div>
 
 <div style="background: #FBFAF6; border: 1px solid #E3E0D5; border-radius: 16px; padding: 28px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
-<h3 style="margin: 0 0 4px 0; font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 22px">By main impact</h3>
+<h3 style="margin: 0 0 4px 0; font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 22px">The heaviest weak spots</h3>
 <div style="display: flex; flex-direction: column; gap: 8px">
-<div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 16px"><span>Slower sourcing and drafting cycles</span><strong style="font-family: 'PT Serif', Georgia, serif; font-size: 18px">13</strong></div>
-<div aria-hidden="true" style="height: 14px; border-radius: 7px; background: #E3E0D5"><div style="width: 100%; height: 14px; border-radius: 7px; background: #B4914F"></div></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 16px"><a href="gap-04.html" style="color: #1B1B18; text-decoration: underline; text-underline-offset: 3px">No downstream integration</a><strong style="font-family: 'PT Serif', Georgia, serif; font-size: 18px">7%</strong></div>
+<div aria-hidden="true" style="height: 14px; border-radius: 7px; background: #E3E0D5"><div style="width: 100.00%; height: 14px; border-radius: 7px; background: #B4914F"></div></div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 8px">
-<div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 16px"><span>Savings and spend leaking</span><strong style="font-family: 'PT Serif', Georgia, serif; font-size: 18px">6</strong></div>
-<div aria-hidden="true" style="height: 14px; border-radius: 7px; background: #E3E0D5"><div style="width: 46.15%; height: 14px; border-radius: 7px; background: #B4914F"></div></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 16px"><a href="gap-09.html" style="color: #1B1B18; text-decoration: underline; text-underline-offset: 3px">No obligation and SLA tracking</a><strong style="font-family: 'PT Serif', Georgia, serif; font-size: 18px">6%</strong></div>
+<div aria-hidden="true" style="height: 14px; border-radius: 7px; background: #E3E0D5"><div style="width: 85.71%; height: 14px; border-radius: 7px; background: #B4914F"></div></div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 8px">
-<div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 16px"><span>Low trust and low adoption</span><strong style="font-family: 'PT Serif', Georgia, serif; font-size: 18px">5</strong></div>
-<div aria-hidden="true" style="height: 14px; border-radius: 7px; background: #E3E0D5"><div style="width: 38.46%; height: 14px; border-radius: 7px; background: #B4914F"></div></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 16px"><a href="gap-10.html" style="color: #1B1B18; text-decoration: underline; text-underline-offset: 3px">No invoice-to-contract validation</a><strong style="font-family: 'PT Serif', Georgia, serif; font-size: 18px">6%</strong></div>
+<div aria-hidden="true" style="height: 14px; border-radius: 7px; background: #E3E0D5"><div style="width: 85.71%; height: 14px; border-radius: 7px; background: #B4914F"></div></div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 8px">
-<div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 16px"><span>Poor visibility into spend and suppliers</span><strong style="font-family: 'PT Serif', Georgia, serif; font-size: 18px">4</strong></div>
-<div aria-hidden="true" style="height: 14px; border-radius: 7px; background: #E3E0D5"><div style="width: 30.77%; height: 14px; border-radius: 7px; background: #B4914F"></div></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 16px"><a href="gap-27.html" style="color: #1B1B18; text-decoration: underline; text-underline-offset: 3px">No contract-to-spend link</a><strong style="font-family: 'PT Serif', Georgia, serif; font-size: 18px">5%</strong></div>
+<div aria-hidden="true" style="height: 14px; border-radius: 7px; background: #E3E0D5"><div style="width: 71.43%; height: 14px; border-radius: 7px; background: #B4914F"></div></div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 8px">
-<div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 16px"><span>Legal and compliance risk</span><strong style="font-family: 'PT Serif', Georgia, serif; font-size: 18px">3</strong></div>
-<div aria-hidden="true" style="height: 14px; border-radius: 7px; background: #E3E0D5"><div style="width: 23.08%; height: 14px; border-radius: 7px; background: #B4914F"></div></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 16px"><a href="gap-13.html" style="color: #1B1B18; text-decoration: underline; text-underline-offset: 3px">Manual renewal</a><strong style="font-family: 'PT Serif', Georgia, serif; font-size: 18px">5%</strong></div>
+<div aria-hidden="true" style="height: 14px; border-radius: 7px; background: #E3E0D5"><div style="width: 71.43%; height: 14px; border-radius: 7px; background: #B4914F"></div></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 16px"><a href="gap-23.html" style="color: #1B1B18; text-decoration: underline; text-underline-offset: 3px">Inaccurate data extraction</a><strong style="font-family: 'PT Serif', Georgia, serif; font-size: 18px">5%</strong></div>
+<div aria-hidden="true" style="height: 14px; border-radius: 7px; background: #E3E0D5"><div style="width: 71.43%; height: 14px; border-radius: 7px; background: #B4914F"></div></div>
 </div>
 </div>
 
@@ -146,12 +170,12 @@ span[style*="border-radius: 999px"]{white-space:nowrap}
 
 <div style="background: #FBFAF6; border: 1px solid #E3E0D5; border-radius: 16px; padding: 20px 24px; box-sizing: border-box; display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 24px; align-items: start">
 <div style="border-left: 4px solid #5C82A8; padding-left: 14px; font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 18px; line-height: 1.3">Intake and sourcing to the contract</div>
-<div style="font-size: 17px; line-height: 1.45; color: #1B1B18">No linkage to intake, sourcing, or RFx, so drafting starts by hand.</div>
+<div style="font-size: 17px; line-height: 1.45; color: #1B1B18">Request, supplier, and award data from intake, sourcing, and RFx do not flow into the contract, so buyers re-enter it when drafting.</div>
 </div>
 
 <div style="background: #FBFAF6; border: 1px solid #E3E0D5; border-radius: 16px; padding: 20px 24px; box-sizing: border-box; display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 24px; align-items: start">
 <div style="border-left: 4px solid #5C82A8; padding-left: 14px; font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 18px; line-height: 1.3">The contract to the PO and invoice</div>
-<div style="font-size: 17px; line-height: 1.45; color: #1B1B18">No linkage to requisition, PO, or invoice. POs are created by hand, and spend, obligations, and SLAs are hard to see.</div>
+<div style="font-size: 17px; line-height: 1.45; color: #1B1B18">Contract pricing and terms do not carry into requisitions and POs. POs are created by hand and often do not match the contract.</div>
 </div>
 
 <div style="background: #FBFAF6; border: 1px solid #E3E0D5; border-radius: 16px; padding: 20px 24px; box-sizing: border-box; display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 24px; align-items: start">
@@ -161,96 +185,100 @@ span[style*="border-radius: 999px"]{white-space:nowrap}
 
 <div style="background: #FBFAF6; border: 1px solid #E3E0D5; border-radius: 16px; padding: 20px 24px; box-sizing: border-box; display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 24px; align-items: start">
 <div style="border-left: 4px solid #5C82A8; padding-left: 14px; font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 18px; line-height: 1.3">The contract to the ERP</div>
-<div style="font-size: 17px; line-height: 1.45; color: #1B1B18">No connection to spend categories, organization, location, or accounting fields, and no view of approval hierarchy or inactive workers.</div>
+<div style="font-size: 17px; line-height: 1.45; color: #1B1B18">The contract does not use the ERP's spend categories, cost centers, locations, or accounting fields, and it cannot see the approval hierarchy or owners who have left.</div>
 </div>
 
 <div style="background: #FBFAF6; border: 1px solid #E3E0D5; border-radius: 16px; padding: 20px 24px; box-sizing: border-box; display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 24px; align-items: start">
 <div style="border-left: 4px solid #5C82A8; padding-left: 14px; font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 18px; line-height: 1.3">The renewal notice to the renewal work</div>
-<div style="font-size: 17px; line-height: 1.45; color: #1B1B18">The system can send a renewal notice, but the renewal process is manual and runs outside the system.</div>
+<div style="font-size: 17px; line-height: 1.45; color: #1B1B18">The system sends a renewal notice, but the rest of the renewal process happens outside it.</div>
 </div>
 
 </div>
 </section>
 
 <section id="gap-by-gap" style="scroll-margin-top: 16px; padding: 64px 72px 0 72px; box-sizing: border-box">
-<div style="font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #3F6488">All 31 weak spots</div>
+<div style="font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #3F6488">All 30 weak spots</div>
 <h2 style="margin: 8px 0 12px 0; font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 38px; line-height: 1.15">Weak spots, by area</h2>
-<p style="margin: 0 0 8px 0; font-size: 18px; line-height: 1.5; color: #6B6A62">Every weak spot from the analysis, grouped by where it sits. Click a weak spot to see its details, impact, and potential solutions.</p>
+<p style="margin: 0 0 8px 0; font-size: 18px; line-height: 1.5; color: #6B6A62">Every weak spot from the analysis, grouped by where it sits, with its weight in the score. Click a weak spot to see its details, impact, and potential solutions.</p>
 <p style="margin: 0 0 24px 0; font-size: 15px; line-height: 1.5; color: #7A786F; font-style: italic">More detail is coming for each weak spot. Have a real example to share? <a href="https://www.linkedin.com/in/richardsusanto" target="_blank" rel="noopener" style="color: #3F6488; text-decoration: underline; text-underline-offset: 3px">Message me on LinkedIn</a>.</p>
 <details style="margin: 0 0 24px 0; background: #FBFAF6; border: 1px solid #E3E0D5; border-radius: 16px">
 <summary style="padding: 14px 20px; min-height: 44px; box-sizing: border-box; cursor: pointer; font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 18px; color: #3F6488">My take on the weak spots, one by one</summary>
 <div style="padding: 4px 24px 12px 24px">
 <p style="margin: 0 0 14px 0; font-size: 17px; line-height: 1.55; color: #1B1B18">Read one at a time, most of these weak spots trace back to data that a person had to type or move by hand. People entered contract data, and they read the renewal field in different ways. Search was slow, trust in the data dropped, and then use dropped with it.</p>
 <p style="margin: 0 0 14px 0; font-size: 17px; line-height: 1.55; color: #1B1B18">If I had to fix weak spots in order, I would start with the ones that cost the most money, such as renewals and price increases. In one case a supplier asked for a 10% increase on a contract capped at 2.5%, and we caught it because we could search by clause. A missed renewal can cost a few million dollars a year. A weak filter costs far less.</p>
-<p style="margin: 0 0 14px 0; font-size: 17px; line-height: 1.55; color: #1B1B18">The change management weak spots look soft, but they matter. Sourcing managers moved to general AI tools because those tools let them combine documents and project notes in one place. When people leave your system because it cannot support the level of analysis they need to make decisions, the data in your system gets worse, so I count trust and adoption alongside the technical weak spots.</p>
+<p style="margin: 0 0 14px 0; font-size: 17px; line-height: 1.55; color: #1B1B18">The adoption and trust weak spots look soft, but they matter. Sourcing managers moved to general AI tools because those tools let them combine documents and project notes in one place. When people leave your system because it cannot support the level of analysis they need to make decisions, the data in your system gets worse, so I count trust and adoption alongside the technical weak spots.</p>
 </div>
 </details>
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: stretch">
 
 <div style="background: #FBFAF6; border: 1px solid #E3E0D5; border-radius: 16px; padding: 28px; box-sizing: border-box">
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
-<h3 style="margin: 0; font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 24px">Technology</h3>
-<span style="font-size: 14px; font-weight: 600; background: #E4EBF1; color: #3F6488; border-radius: 999px; padding: 4px 12px">12 weak spots</span>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 12px; margin-bottom: 20px">
+<h3 style="margin: 0; font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 24px">Post Signature (Performance)</h3>
+<span style="white-space: nowrap; font-size: 14px; font-weight: 600; background: #E4EBF1; color: #3F6488; border-radius: 999px; padding: 4px 12px">30% of the score</span>
 </div>
 <ul style="margin: 0; padding: 0 0 0 14px; list-style: none; border-left: 3px solid #5C82A8; display: flex; flex-direction: column; gap: 4px; font-size: 15px; line-height: 1.4">
-<li><a href="gap-01.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Model limitation (not trained on the corporate AI playbook)</a></li>
-<li><a href="gap-02.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">No governed clause library and fallback positions</a></li>
-<li><a href="gap-03.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Lack of integration with upstream systems</a></li>
-<li><a href="gap-04.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Lack of integration with downstream systems</a></li>
-<li><a href="gap-05.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Lack of integration with ERP</a></li>
-<li><a href="gap-06.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Lack of integration with ERP worker data</a></li>
-<li><a href="gap-07.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Limited search functionality</a></li>
-<li><a href="gap-08.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Lack of AI insights</a></li>
-<li><a href="gap-09.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">No obligation and SLA tracking</a></li>
-<li><a href="gap-10.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">No invoice-to-contract validation</a></li>
-<li><a href="gap-11.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">No supplier risk and performance data in the contract record</a></li>
-<li><a href="gap-12.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">No bulk amendment</a></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-09.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">No obligation and SLA tracking</a><span style="flex: none; font-size: 14px; color: #6B6A62">6%</span></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-10.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">No invoice-to-contract validation</a><span style="flex: none; font-size: 14px; color: #6B6A62">6%</span></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-27.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">No contract-to-spend link</a><span style="flex: none; font-size: 14px; color: #6B6A62">5%</span></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-13.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Manual renewal</a><span style="flex: none; font-size: 14px; color: #6B6A62">5%</span></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-19.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Policy not enforced</a><span style="flex: none; font-size: 14px; color: #6B6A62">4%</span></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-18.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">No savings tracking</a><span style="flex: none; font-size: 14px; color: #6B6A62">2%</span></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-12.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">No bulk amendment</a><span style="flex: none; font-size: 14px; color: #6B6A62">2%</span></li>
 </ul>
 </div>
-
 <div style="background: #FBFAF6; border: 1px solid #E3E0D5; border-radius: 16px; padding: 28px; box-sizing: border-box">
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
-<h3 style="margin: 0; font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 24px">Process</h3>
-<span style="font-size: 14px; font-weight: 600; background: #E4EBF1; color: #3F6488; border-radius: 999px; padding: 4px 12px">10 weak spots</span>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 12px; margin-bottom: 20px">
+<h3 style="margin: 0; font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 24px">Creation &amp; Execution</h3>
+<span style="white-space: nowrap; font-size: 14px; font-weight: 600; background: #E4EBF1; color: #3F6488; border-radius: 999px; padding: 4px 12px">15% of the score</span>
 </div>
 <ul style="margin: 0; padding: 0 0 0 14px; list-style: none; border-left: 3px solid #5C82A8; display: flex; flex-direction: column; gap: 4px; font-size: 15px; line-height: 1.4">
-<li><a href="gap-13.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Manual renewal</a></li>
-<li><a href="gap-14.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Disjointed processes</a></li>
-<li><a href="gap-15.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Manual negotiation preparation</a></li>
-<li><a href="gap-16.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Inflexible workflow</a></li>
-<li><a href="gap-17.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Lack of centralized dashboard</a></li>
-<li><a href="gap-18.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Inability to capture savings</a></li>
-<li><a href="gap-19.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Policy is not enforced</a></li>
-<li><a href="gap-20.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Manual signature gathering workflow</a></li>
-<li><a href="gap-21.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Supplier negotiation happens outside the CLM</a></li>
-<li><a href="gap-22.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Approval routing is not risk-based</a></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-02.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Drafting not tied to the playbook</a><span style="flex: none; font-size: 14px; color: #6B6A62">4%</span></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-15.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Manual negotiation prep</a><span style="flex: none; font-size: 14px; color: #6B6A62">4%</span></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-21.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Negotiation outside the CLM</a><span style="flex: none; font-size: 14px; color: #6B6A62">2%</span></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-22.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">No risk-based approval routing</a><span style="flex: none; font-size: 14px; color: #6B6A62">2%</span></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-16.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Rigid workflow</a><span style="flex: none; font-size: 14px; color: #6B6A62">2%</span></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-20.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Manual signature process</a><span style="flex: none; font-size: 14px; color: #6B6A62">1%</span></li>
 </ul>
 </div>
-
 <div style="background: #FBFAF6; border: 1px solid #E3E0D5; border-radius: 16px; padding: 28px; box-sizing: border-box">
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
-<h3 style="margin: 0; font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 24px">Data</h3>
-<span style="font-size: 14px; font-weight: 600; background: #E4EBF1; color: #3F6488; border-radius: 999px; padding: 4px 12px">5 weak spots</span>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 12px; margin-bottom: 20px">
+<h3 style="margin: 0; font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 24px">Integration</h3>
+<span style="white-space: nowrap; font-size: 14px; font-weight: 600; background: #E4EBF1; color: #3F6488; border-radius: 999px; padding: 4px 12px">25% of the score</span>
 </div>
 <ul style="margin: 0; padding: 0 0 0 14px; list-style: none; border-left: 3px solid #5C82A8; display: flex; flex-direction: column; gap: 4px; font-size: 15px; line-height: 1.4">
-<li><a href="gap-23.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Data inaccuracies (OCR)</a></li>
-<li><a href="gap-24.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Inaccurate vendor data</a></li>
-<li><a href="gap-25.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Parent-child linkage</a></li>
-<li><a href="gap-26.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Slow legacy contract migration</a></li>
-<li><a href="gap-27.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">No link between contract coverage and spend</a></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-04.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">No downstream integration</a><span style="flex: none; font-size: 14px; color: #6B6A62">7%</span></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-03.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">No upstream integration</a><span style="flex: none; font-size: 14px; color: #6B6A62">4%</span></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-05.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">No financial data integration</a><span style="flex: none; font-size: 14px; color: #6B6A62">4%</span></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-11.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">No supplier risk and performance data</a><span style="flex: none; font-size: 14px; color: #6B6A62">4%</span></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-06.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">No employee data integration</a><span style="flex: none; font-size: 14px; color: #6B6A62">3%</span></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-14.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Disconnected processes</a><span style="flex: none; font-size: 14px; color: #6B6A62">3%</span></li>
 </ul>
 </div>
-
 <div style="background: #FBFAF6; border: 1px solid #E3E0D5; border-radius: 16px; padding: 28px; box-sizing: border-box">
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
-<h3 style="margin: 0; font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 24px">Change management</h3>
-<span style="font-size: 14px; font-weight: 600; background: #E4EBF1; color: #3F6488; border-radius: 999px; padding: 4px 12px">4 weak spots</span>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 12px; margin-bottom: 20px">
+<h3 style="margin: 0; font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 24px">Data and repository</h3>
+<span style="white-space: nowrap; font-size: 14px; font-weight: 600; background: #E4EBF1; color: #3F6488; border-radius: 999px; padding: 4px 12px">20% of the score</span>
 </div>
 <ul style="margin: 0; padding: 0 0 0 14px; list-style: none; border-left: 3px solid #5C82A8; display: flex; flex-direction: column; gap: 4px; font-size: 15px; line-height: 1.4">
-<li><a href="gap-28.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">LLM tool preference</a></li>
-<li><a href="gap-29.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Bad UI</a></li>
-<li><a href="gap-30.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Slow time to value and heavy IT dependence</a></li>
-<li><a href="gap-31.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">AI answers are not traceable or trusted</a></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-23.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Inaccurate data extraction</a><span style="flex: none; font-size: 14px; color: #6B6A62">5%</span></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-24.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Inaccurate vendor data</a><span style="flex: none; font-size: 14px; color: #6B6A62">4%</span></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-25.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">No parent-child linkage</a><span style="flex: none; font-size: 14px; color: #6B6A62">4%</span></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-26.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Slow legacy migration</a><span style="flex: none; font-size: 14px; color: #6B6A62">3%</span></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-07.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Limited search</a><span style="flex: none; font-size: 14px; color: #6B6A62">2%</span></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-08.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">No AI insights</a><span style="flex: none; font-size: 14px; color: #6B6A62">2%</span></li>
+</ul>
+</div>
+<div style="background: #FBFAF6; border: 1px solid #E3E0D5; border-radius: 16px; padding: 28px; box-sizing: border-box">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 12px; margin-bottom: 20px">
+<h3 style="margin: 0; font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 24px">Adoption and trust</h3>
+<span style="white-space: nowrap; font-size: 14px; font-weight: 600; background: #E4EBF1; color: #3F6488; border-radius: 999px; padding: 4px 12px">10% of the score</span>
+</div>
+<ul style="margin: 0; padding: 0 0 0 14px; list-style: none; border-left: 3px solid #5C82A8; display: flex; flex-direction: column; gap: 4px; font-size: 15px; line-height: 1.4">
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-29.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Poor user experience</a><span style="flex: none; font-size: 14px; color: #6B6A62">3%</span></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-28.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Users prefer general AI tools</a><span style="flex: none; font-size: 14px; color: #6B6A62">2%</span></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-31.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">No traceability for AI answers</a><span style="flex: none; font-size: 14px; color: #6B6A62">2%</span></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-30.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">Slow time to value</a><span style="flex: none; font-size: 14px; color: #6B6A62">2%</span></li>
+<li style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><a href="gap-17.html" style="display: inline-block; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px">No role-based dashboard</a><span style="flex: none; font-size: 14px; color: #6B6A62">1%</span></li>
 </ul>
 </div>
 
@@ -303,9 +331,20 @@ span[style*="border-radius: 999px"]{white-space:nowrap}
 </div>
 </section>
 
+<section id="survey" style="padding: 64px 72px 0 72px; box-sizing: border-box">
+<div class="endcta" style="background: #1B1B18; color: #FBFAF6; border-radius: 16px; padding: 36px 40px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px">
+<div style="max-width: 620px">
+<div style="font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #D2AE68">Your turn</div>
+<h2 style="margin: 8px 0 10px 0; font-family: 'PT Serif', Georgia, serif; font-weight: 400; font-size: 34px; line-height: 1.15; color: #FBFAF6">Score your own contract process</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.5; color: #D9D6CB">30 questions, one for each weak spot, about 5 minutes. You get a score out of 100, how each area did, and the fixes that matter most for you. Your answers stay in your browser.</p>
+</div>
+<a href="survey.html" class="cta cta-gold">Take the survey</a>
+</div>
+</section>
+
 <footer style="margin-top: auto; padding: 40px 72px 56px 72px; box-sizing: border-box">
 <div style="border-top: 1px solid #E3E0D5; padding-top: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 24px; font-size: 15px; line-height: 1.5; color: #6B6A62">
-<div style="max-width: 520px">Based on a contract lifecycle management analysis across intake, sourcing, contracting, and payables. Each weak spot is counted once, under its main impact.</div>
+<div style="max-width: 520px">Based on a contract lifecycle management analysis across intake, sourcing, contracting, and payables. Each weak spot is counted once, under the area it belongs to. Weights reflect my field judgment.</div>
 <div style="display: flex; flex-direction: column; gap: 16px; align-items: flex-start"><div style="display: flex; align-items: center; gap: 14px; white-space: nowrap"><img src="richard.png" width="64" height="64" alt="Richard Susanto" style="width: 64px; height: 64px; border-radius: 50%; display: block; flex: none"><div style="text-align: left"><div style="font-weight: 600; color: #1B1B18">Richard Susanto</div><a href="https://www.linkedin.com/in/richardsusanto" target="_blank" rel="noopener" style="display: inline-block; padding: 4px 0; font-size: 15px; font-weight: 500; color: #3F6488; text-decoration: underline; text-underline-offset: 3px">Connect on LinkedIn</a></div></div><div style="display: flex; align-items: center; gap: 10px; max-width: 290px"><img src="aloha.png" width="40" height="40" alt="Aloha, Richard's personal AI agent" style="width: 40px; height: 40px; border-radius: 50%; display: block; flex: none"><div style="font-size: 13px; line-height: 1.45; color: #6B6A62">Article format brainstormed with Aloha, my personal AI agent. Site created by Claude Code.</div></div></div>
 </div>
 </footer>

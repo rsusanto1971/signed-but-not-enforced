@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>How enforced are your contracts? | Signed but Not Enforced</title>
-<meta name="description" content="Score your contract process against 30 CLM weak spots and see how it compares.">
+<meta name="description" content="Score your contract process against 30 CLM weak spots and get the fixes that matter most for you. Works with or without a CLM.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800&family=Inter:wght@400;500;600;700&family=PT+Serif:wght@400;700&display=swap" rel="stylesheet">
@@ -229,6 +229,13 @@ button { font: inherit; cursor: pointer; }
 .backbtn { display: inline-block; font-size: 15px; font-weight: 600; color: var(--pen); text-decoration: none; background: var(--sheet); border: 1px solid var(--rule); border-radius: 8px; padding: 11px 16px; }
 .backbtn:hover { border-color: var(--pen); }
 .tip { background: var(--pen-soft); border-radius: 8px; padding: 12px 16px; font-size: 15px; margin: 0 0 24px; }
+.clmq { border: 0; padding: 0; margin: 0 0 18px; min-width: 0; }
+.clmq legend { font-family: var(--serif); font-size: 19px; line-height: 1.3; padding: 0; margin-bottom: 12px; }
+.opt { display: flex; align-items: center; gap: 12px; padding: 13px 16px; margin-bottom: 8px; border: 1px solid var(--rule); border-radius: 8px; background: var(--sheet); cursor: pointer; font-size: 16px; }
+.opt:hover { border-color: var(--pen); }
+.opt:has(input:checked) { border-color: var(--pen); background: var(--pen-soft); font-weight: 600; }
+.opt input { accent-color: var(--pen); width: 18px; height: 18px; margin: 0; flex: none; }
+#clmerr { margin: 0 0 16px; }
 </style>
 </head>
 <body>
@@ -239,7 +246,7 @@ button { font: inherit; cursor: pointer; }
   </div>
 </main>
 <script>
-const DATA = {"groups": [{"name": "Post Signature (Performance)", "weight": 30, "items": [{"issue": "Manual renewals and price increases", "weight": 7, "q": "Renewals start before the notice deadline, and supplier price increases are checked against the contract's cap before anyone accepts them.", "remedy": "Use an AI agent to collect the business owner's renewal intent and open a sourcing project early enough to negotiate before the notice deadline.\n\nCheck every supplier price-increase request against the contract's cap or price index before anyone accepts it.\n\nFor low-value, low-risk categories, pilot automated supplier negotiation within approved limits."}, {"issue": "No obligation and SLA tracking", "weight": 6, "q": "Obligations and SLAs are pulled out at signature, each one has an owner, and someone is alerted before a deadline or trigger is missed.", "remedy": "Extract obligations and SLAs at signature, assign owners, track milestones, send alerts, and open a claim workflow when a trigger is missed.\n\nFor SaaS vendors, uptime is often posted on a public status page, so an AI agent can pull it and flag likely SLA breaches before the vendor's own report comes in."}, {"issue": "No invoice-to-contract validation", "weight": 6, "q": "Invoice prices, discounts, and payment terms are checked against the contract line by line before we pay.", "remedy": "Connect the CLM to AP and the ERP so invoice lines are matched to contract prices and terms, with exceptions routed to sourcing."}, {"issue": "No contract-to-spend link", "weight": 4, "q": "We can see which suppliers we pay without an active contract in place.", "remedy": "Match AP and PO spend to the contract repository by supplier, and flag suppliers with spend but no active contract.\n\nAutomate the link so every PO and invoice carries a contract reference."}, {"issue": "Policy not enforced", "weight": 4, "q": "Business users go through procurement to renew, change, or cancel a contract.", "remedy": "Build a simple procurement front door (ex: guided intake) that is easier to use than going around procurement."}, {"issue": "No bulk amendment", "weight": 2, "q": "When a new regulation or tariff hits, we can find every affected contract and amend them in one campaign.", "remedy": "Use AI to find affected clauses across the repository, list the contracts in scope, and run a bulk amendment campaign."}, {"issue": "No savings tracking", "weight": 1, "q": "We compare the final contract value with the budget and record the savings.", "remedy": "Capture budget data at intake and sourcing, and compare it with the final contract value."}]}, {"name": "Creation & Execution", "weight": 15, "items": [{"issue": "Drafting not tied to the playbook", "weight": 4, "q": "Drafting and redlining use approved clauses with fallback positions, and the AI flags deviations in supplier paper.", "remedy": "Build a clause library tied to the playbook, with preferred, fallback, and walk-away positions. Train the AI to draft from it, flag deviations in supplier paper, and suggest the approved fallback."}, {"issue": "Manual negotiation prep", "weight": 4, "q": "Buyers get one negotiation brief with contract history, spend, supplier performance, and market data, without building it by hand.", "remedy": "Use an AI agent to build a negotiation brief for the buyer from contract history, spend, supplier performance, and market data."}, {"issue": "Negotiation outside the CLM", "weight": 2, "q": "Redlines with suppliers happen in a shared workspace with version control, not over email.", "remedy": "Offer a supplier collaboration portal with version control, tracked changes, and a full audit trail."}, {"issue": "No risk-based approval routing", "weight": 2, "q": "Approvals are routed by contract value, risk, and deviation from standard terms, with a fast track for standard deals.", "remedy": "Route approvals by contract value, clause deviation, and supplier risk, with a fast track for standard terms."}, {"issue": "Rigid workflow", "weight": 2, "q": "Our CLM workflows match how we actually work, including our own procedures and exceptions.", "remedy": "Let admins build workflows from the company's procedure document with AI help, then review them before go-live."}, {"issue": "Manual signature process", "weight": 1, "q": "Signing starts from the CLM, and the signed copy comes back to the contract record on its own.", "remedy": "Integrate an e-signature platform so signing starts from the CLM and the signed copy returns to the contract record."}]}, {"name": "Integration", "weight": 25, "items": [{"issue": "No downstream integration", "weight": 7, "q": "Contract pricing, terms, and line items flow into requisitions and POs.", "remedy": "Pass contract pricing, terms, and line items to the P2P system so requisitions and POs are pre-filled from the contract.\n\nUse an AI agent to create requisitions or POs directly from the contract, with a buyer reviewing before release. To code them correctly, the agent needs the company's spend history and buying rules (ex: categories, cost centers, approval limits)."}, {"issue": "No upstream integration", "weight": 4, "q": "Request, supplier, and award data from intake and sourcing flow into the CLM, so nobody re-keys it.", "remedy": "Connect the CLM to procurement intake and sourcing so request, budget, supplier, and award data carry into the contract record.\n\nCarrying the budget over also lets procurement capture savings once the final price is agreed."}, {"issue": "No financial data integration", "weight": 4, "q": "Our CLM uses the same categories, cost centers, and accounting fields as the ERP.", "remedy": "Sync categories, cost centers, locations, and accounting fields from the ERP through APIs."}, {"issue": "No supplier risk and performance data", "weight": 4, "q": "Supplier risk and performance scores show up on the contract record.", "remedy": "Bring supplier risk and performance data onto the contract record through integrations, and alert the owner when a score changes."}, {"issue": "No employee data integration", "weight": 3, "q": "Our CLM syncs roles and reporting lines from HR, and contracts are reassigned when an owner leaves.", "remedy": "Sync workers, roles, and reporting lines from the HR system through APIs, and reassign contracts when an owner leaves."}, {"issue": "Disconnected processes", "weight": 3, "q": "Anyone can see where a request stands from intake to signed contract, and who owns the next step.", "remedy": "Add a process orchestration layer that tracks each request from intake to signed contract, with the status and owner at each step (usually not a CLM feature)."}]}, {"name": "Data and repository", "weight": 20, "items": [{"issue": "Inaccurate data extraction", "weight": 5, "q": "Key fields pulled from contracts, such as dates, values, and renewal terms, are accurate enough that people trust them.", "remedy": "Improve OCR and extraction models, and have sourcing confirm key fields before the contract is finalized."}, {"issue": "Inaccurate vendor data", "weight": 4, "q": "Each contract is linked to the right supplier record in the vendor master.", "remedy": "Use AI agents to compare contract history with vendor master data and flag likely mismatches for review."}, {"issue": "No parent-child linkage", "weight": 4, "q": "SOWs, amendments, and order forms are linked to their parent contract.", "remedy": "Use AI to suggest the right parent for each child agreement, with sourcing confirming the link."}, {"issue": "Slow legacy migration", "weight": 3, "q": "All of our older contracts are in the CLM, not still sitting in shared drives or inboxes.", "remedy": "Run a one-time bulk load with AI extraction, confidence scores, and a review queue for low-confidence fields."}, {"issue": "Limited search", "weight": 2, "q": "We can find a specific contract by clause, term, or value in under a minute.", "remedy": "Make all metadata, fields, and clause text searchable, with operators such as contains, does not contain, and date ranges."}, {"issue": "No AI insights", "weight": 2, "q": "We can ask a question across all contracts, such as which ones auto-renew in the next 90 days, and get an answer.", "remedy": "Add an LLM that answers questions across one contract, a folder, or the whole repository."}]}, {"name": "Adoption and trust", "weight": 10, "items": [{"issue": "Poor user experience", "weight": 3, "q": "Business users find the CLM easy enough that they use it instead of email.", "remedy": "Simplify screens by role, cut steps for common tasks, and test with real users before go-live."}, {"issue": "Users prefer general AI tools", "weight": 2, "q": "Our sourcing team does contract analysis inside the CLM, not in outside AI tools.", "remedy": "Let users add external documents and web sources to contract analysis inside the CLM, under the same access controls."}, {"issue": "No traceability for AI answers", "weight": 2, "q": "When the CLM's AI gives an answer, it shows the clause or document it came from.", "remedy": "Show citations to the source clause, confidence levels, a human review step, and an audit trail of AI actions."}, {"issue": "Slow time to value", "weight": 2, "q": "Procurement can change workflows, fields, and forms without IT or the vendor.", "remedy": "Move to no-code configuration owned by procurement, backed by hands-on implementation support (ex: forward deployed engineers)."}, {"issue": "No role-based dashboard", "weight": 1, "q": "Each role, such as buyer, legal, and business owner, has a home screen with what they need to act on.", "remedy": "Offer configurable dashboards for each role (ex: buyer, legal, business owner, CPO)."}]}]};
+const DATA = {"groups": [{"name": "Post Signature (Performance)", "weight": 30, "items": [{"issue": "Manual renewals and price increases", "weight": 7, "qs": [{"q": "Renewal work starts early enough to negotiate before the contract's notice deadline."}, {"q": "Supplier price-increase requests are checked against the contract's cap or price index before anyone accepts them."}], "remedy": "Use an AI agent to collect the business owner's renewal intent and open a sourcing project early enough to negotiate before the notice deadline.\n\nCheck every supplier price-increase request against the contract's cap or price index before anyone accepts it.\n\nFor low-value, low-risk categories, pilot automated supplier negotiation within approved limits."}, {"issue": "No obligation and SLA tracking", "weight": 6, "qs": [{"q": "Obligations and SLAs are pulled out of each contract at signature and recorded."}, {"q": "Each obligation and SLA has a named owner."}, {"q": "The owner is alerted before an obligation deadline passes or an SLA breach goes unclaimed."}], "remedy": "Extract obligations and SLAs at signature, assign owners, track milestones, send alerts, and open a claim workflow when a trigger is missed.\n\nFor SaaS vendors, uptime is often posted on a public status page, so an AI agent can pull it and flag likely SLA breaches before the vendor's own report comes in."}, {"issue": "No invoice-to-contract validation", "weight": 6, "qs": [{"q": "Invoice prices and discounts are checked against the contract line by line before we pay."}, {"q": "We pay on the payment terms in the contract, not the supplier's default terms in the payables system."}], "remedy": "Connect the CLM to AP and the ERP so invoice lines are matched to contract prices and terms, with exceptions routed to sourcing."}, {"issue": "No contract-to-spend link", "weight": 4, "qs": [{"q": "We can see which suppliers we pay without an active contract in place."}], "remedy": "Match AP and PO spend to the contract repository by supplier, and flag suppliers with spend but no active contract.\n\nAutomate the link so every PO and invoice carries a contract reference."}, {"issue": "Policy not enforced", "weight": 4, "qs": [{"q": "Business users go through procurement to renew, change, or cancel a contract."}], "remedy": "Build a simple procurement front door (ex: guided intake) that is easier to use than going around procurement."}, {"issue": "No bulk amendment", "weight": 2, "qs": [{"q": "When a new regulation or tariff hits, we can find every affected contract."}, {"q": "We can amend all of the affected contracts in one campaign, not one by one."}], "remedy": "Use AI to find affected clauses across the repository, list the contracts in scope, and run a bulk amendment campaign."}, {"issue": "No savings tracking", "weight": 1, "qs": [{"q": "We compare the final contract value with the budget and record the savings."}], "remedy": "Capture budget data at intake and sourcing, and compare it with the final contract value."}]}, {"name": "Creation & Execution", "weight": 15, "items": [{"issue": "Drafting not tied to the playbook", "weight": 4, "qs": [{"q": "Drafting and redlining use approved clauses with preferred and fallback positions from the playbook."}, {"q": "When we review supplier paper, deviations from the playbook are flagged automatically."}], "remedy": "Build a clause library tied to the playbook, with preferred, fallback, and walk-away positions. Train the AI to draft from it, flag deviations in supplier paper, and suggest the approved fallback."}, {"issue": "Manual negotiation prep", "weight": 4, "qs": [{"q": "Buyers get one negotiation brief with contract history, spend, supplier performance, and market data, without building it by hand."}], "remedy": "Use an AI agent to build a negotiation brief for the buyer from contract history, spend, supplier performance, and market data."}, {"issue": "Negotiation outside the CLM", "weight": 2, "qs": [{"q": "Redlines with suppliers happen in a shared workspace with version control, not over email."}], "remedy": "Offer a supplier collaboration portal with version control, tracked changes, and a full audit trail."}, {"issue": "No risk-based approval routing", "weight": 2, "qs": [{"q": "Approvals are routed by risk and by how far the deal strays from standard terms, not only by dollar value."}], "remedy": "Route approvals by contract value, clause deviation, and supplier risk, with a fast track for standard terms."}, {"issue": "Rigid workflow", "weight": 2, "qs": [{"q": "Our CLM workflows match how we actually work, including our own procedures and exceptions.", "clm": true}], "remedy": "Let admins build workflows from the company's procedure document with AI help, then review them before go-live."}, {"issue": "Manual signature process", "weight": 1, "qs": [{"q": "E-signature is built into the CLM, so the signed copy lands on the contract record on its own.", "clm": true}], "remedy": "Integrate an e-signature platform so signing starts from the CLM and the signed copy returns to the contract record."}]}, {"name": "Integration", "weight": 25, "items": [{"issue": "No downstream integration", "weight": 7, "qs": [{"q": "Contract pricing, terms, and line items flow into requisitions and POs."}], "remedy": "Pass contract pricing, terms, and line items to the P2P system so requisitions and POs are pre-filled from the contract.\n\nUse an AI agent to create requisitions or POs directly from the contract, with a buyer reviewing before release. To code them correctly, the agent needs the company's spend history and buying rules (ex: categories, cost centers, approval limits)."}, {"issue": "No upstream integration", "weight": 4, "qs": [{"q": "Request, supplier, and award data from intake and sourcing carry into the contract record, so nobody re-keys it."}], "remedy": "Connect the CLM to procurement intake and sourcing so request, budget, supplier, and award data carry into the contract record.\n\nCarrying the budget over also lets procurement capture savings once the final price is agreed."}, {"issue": "No financial data integration", "weight": 4, "qs": [{"q": "Our contract records use the same categories, cost centers, and accounting fields as the ERP."}], "remedy": "Sync categories, cost centers, locations, and accounting fields from the ERP through APIs."}, {"issue": "No supplier risk and performance data", "weight": 4, "qs": [{"q": "Supplier risk scores, such as financial or cyber risk, show up on the contract record."}, {"q": "Supplier performance scores show up on the contract record."}], "remedy": "Bring supplier risk and performance data onto the contract record through integrations, and alert the owner when a score changes."}, {"issue": "No employee data integration", "weight": 3, "qs": [{"q": "Our CLM gets roles and reporting lines from the HR system, so approvals follow the current org.", "clm": true}, {"q": "When a contract owner leaves, their contracts are reassigned to someone else."}], "remedy": "Sync workers, roles, and reporting lines from the HR system through APIs, and reassign contracts when an owner leaves."}, {"issue": "Disconnected processes", "weight": 3, "qs": [{"q": "There is one place to see each request's current step and owner, from intake to signed contract."}], "remedy": "Add a process orchestration layer that tracks each request from intake to signed contract, with the status and owner at each step (usually not a CLM feature)."}]}, {"name": "Data and repository", "weight": 20, "items": [{"issue": "Inaccurate data extraction", "weight": 5, "qs": [{"q": "Key contract fields, such as dates, values, and renewal terms, are recorded accurately enough that people trust them."}], "remedy": "Improve OCR and extraction models, and have sourcing confirm key fields before the contract is finalized."}, {"issue": "Inaccurate vendor data", "weight": 4, "qs": [{"q": "Each contract is linked to the right supplier record in the vendor master."}], "remedy": "Use AI agents to compare contract history with vendor master data and flag likely mismatches for review."}, {"issue": "No parent-child linkage", "weight": 4, "qs": [{"q": "SOWs, amendments, and order forms are linked to their parent contract."}], "remedy": "Use AI to suggest the right parent for each child agreement, with sourcing confirming the link."}, {"issue": "Slow legacy migration", "weight": 3, "qs": [{"q": "All of our older contracts are in the CLM, not still sitting in shared drives or inboxes.", "clm": true}], "remedy": "Run a one-time bulk load with AI extraction, confidence scores, and a review queue for low-confidence fields."}, {"issue": "Limited search", "weight": 2, "qs": [{"q": "We can find a specific contract by clause, term, or value in under a minute."}], "remedy": "Make all metadata, fields, and clause text searchable, with operators such as contains, does not contain, and date ranges."}, {"issue": "No AI insights", "weight": 2, "qs": [{"q": "We can ask a question across all contracts, such as which ones auto-renew in the next 90 days, and get an answer."}], "remedy": "Add an LLM that answers questions across one contract, a folder, or the whole repository."}]}, {"name": "Adoption and trust", "weight": 10, "items": [{"issue": "Poor user experience", "weight": 3, "qs": [{"q": "Business users find the CLM easy enough that they use it instead of email.", "clm": true}], "remedy": "Simplify screens by role, cut steps for common tasks, and test with real users before go-live."}, {"issue": "Users prefer general AI tools", "weight": 2, "qs": [{"q": "Our sourcing team does contract analysis inside the CLM, not in outside AI tools.", "clm": true}], "remedy": "Let users add external documents and web sources to contract analysis inside the CLM, under the same access controls."}, {"issue": "No traceability for AI answers", "weight": 2, "qs": [{"q": "When the CLM's AI gives an answer, it shows the clause or document it came from.", "clm": true}], "remedy": "Show citations to the source clause, confidence levels, a human review step, and an audit trail of AI actions."}, {"issue": "Slow time to value", "weight": 2, "qs": [{"q": "Procurement can change CLM workflows, fields, and forms without IT or the vendor.", "clm": true}], "remedy": "Move to no-code configuration owned by procurement, backed by hands-on implementation support (ex: forward deployed engineers)."}, {"issue": "No role-based dashboard", "weight": 1, "qs": [{"q": "Each role, such as buyer, legal, and business owner, has a CLM home screen with what they need to act on.", "clm": true}], "remedy": "Offer configurable dashboards for each role (ex: buyer, legal, business owner, CPO)."}]}]};
 
 const STOPS = ["No", "Partly", "Mostly", "Yes"];
 const PER_PAGE = 5;
@@ -260,45 +267,61 @@ const STUDY = {
   url: "https://www.deloitte.com/content/dam/assets-zone3/us/en/docs/services/tax/2024/us-tax-roi-of-contracting-excellence.pdf"
 };
 
+// Each weak spot has one or more questions, and its weight is split evenly across them.
+// Questions marked clm only apply when the company has a CLM. Without one they are skipped and count as zero.
+const SPOTS = [];
 const QS = [];
-DATA.groups.forEach((g, gi) => g.items.forEach(it => QS.push(Object.assign({}, it, { gi }))));
-const PAGES = Math.ceil(QS.length / PER_PAGE);
-const KEY = "sbne-clm-check-v2";
+DATA.groups.forEach((g, gi) => g.items.forEach(it => {
+  const si = SPOTS.length;
+  SPOTS.push(Object.assign({}, it, { gi }));
+  it.qs.forEach(sub => QS.push({ q: sub.q, clm: !!sub.clm, gi, si, weight: it.weight / it.qs.length }));
+}));
+const KEY = "sbne-clm-check-v3";
+const SECONDS_PER_Q = 10;
 const app = document.getElementById("app");
 const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+// clm: null (not picked yet), "yes", or "no"
 // answer per question: null (not answered), 0 to 3 (No to Yes), or "u" (Not sure)
-let state = { screen: "intro", page: 0, answers: new Array(QS.length).fill(null) };
+let state = { screen: "intro", page: 0, clm: null, answers: new Array(QS.length).fill(null) };
 
 const isVal = a => Number.isInteger(a) && a >= 0 && a <= 3;
+const applies = i => state.clm !== "no" || !QS[i].clm;
+function active() { const out = []; QS.forEach((_, i) => { if (applies(i)) out.push(i); }); return out; }
+function pageCount() { return Math.max(1, Math.ceil(active().length / PER_PAGE)); }
+function pageItems(p) { return active().slice(p * PER_PAGE, (p + 1) * PER_PAGE); }
+function countFor(clm) { return QS.filter(q => clm !== "no" || !q.clm).length; }
+function minutes(n) { return Math.max(1, Math.round(n * SECONDS_PER_Q / 60)); }
+
 function save() {
-  try { localStorage.setItem(KEY, JSON.stringify({ page: state.page, answers: state.answers })); } catch (e) {}
+  try { localStorage.setItem(KEY, JSON.stringify({ page: state.page, clm: state.clm, answers: state.answers })); } catch (e) {}
 }
 function load() {
   try {
     const s = JSON.parse(localStorage.getItem(KEY) || "null");
     if (s && Array.isArray(s.answers) && s.answers.length === QS.length) {
       state.answers = s.answers.map(a => (isVal(a) || a === "u") ? a : null);
-      state.page = Math.max(0, Math.min(Number(s.page) || 0, PAGES - 1));
+      state.clm = (s.clm === "yes" || s.clm === "no") ? s.clm : null;
+      state.page = Math.max(0, Math.min(Number(s.page) || 0, pageCount() - 1));
     }
   } catch (e) {}
 }
-function clearSave() { try { localStorage.removeItem(KEY); } catch (e) {} }
-function resetAll() { state.answers = new Array(QS.length).fill(null); state.page = 0; clearSave(); }
+// Start over clears the answers but keeps the CLM choice.
+function resetAll() { state.answers = new Array(QS.length).fill(null); state.page = 0; save(); }
 
 function esc(s) {
   return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 }
-function pts(i) { const a = state.answers[i]; return isVal(a) ? QS[i].weight * a / 3 : 0; }
+function pts(i) { const a = state.answers[i]; return applies(i) && isVal(a) ? QS[i].weight * a / 3 : 0; }
 function totalScore() { return QS.reduce((s, _, i) => s + pts(i), 0); }
 function groupScore(gi) {
   let w = 0, p = 0;
   QS.forEach((q, i) => { if (q.gi === gi) { w += q.weight; p += pts(i); } });
   return w ? p / w * 100 : 0;
 }
+function groupSkipped(gi) { return QS.every((q, i) => q.gi !== gi || !applies(i)); }
 function levelFor(score) { return LEVELS.find(l => score >= l.min); }
-function answeredCount() { return state.answers.filter(a => a != null).length; }
-function pageRange(p) { const start = p * PER_PAGE; return [start, Math.min(start + PER_PAGE, QS.length)]; }
+function answeredCount() { return active().filter(i => state.answers[i] != null).length; }
 function money(n) {
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", notation: "compact", maximumFractionDigits: 1 }).format(n);
 }
@@ -323,10 +346,20 @@ function render() {
   focusHeading();
 }
 
+function introMeta() {
+  if (!state.clm) {
+    const all = countFor("yes"), lite = countFor("no");
+    return `${all} questions, or ${lite} if you don't have a CLM. About ${minutes(all)} minutes, scored out of 100.`;
+  }
+  const n = active().length;
+  return `${n} questions on ${pageCount()} pages, about ${minutes(n)} minutes, scored out of 100.`;
+}
+
 function renderIntro() {
+  const act = active();
   const n = answeredCount();
-  const done = n === QS.length;
-  const firstOpen = state.answers.findIndex(a => a == null);
+  const done = n === act.length;
+  const firstOpen = act.findIndex(i => state.answers[i] == null);
   let buttons;
   if (done) {
     buttons = `<button class="primary" id="seeResult">See my result</button>
@@ -337,18 +370,46 @@ function renderIntro() {
   } else {
     buttons = `<button class="primary" id="start">Start the survey</button>`;
   }
+  const areas = DATA.groups.map((g, gi) => {
+    const k = QS.filter((q, i) => q.gi === gi && applies(i)).length;
+    const label = k ? `${k} ${k === 1 ? "question" : "questions"}` : "Skipped without a CLM";
+    return `
+        <li><span>${esc(g.name)}</span><span class="n">${label}</span><span class="w">${g.weight}%</span></li>`;
+  }).join("");
+  const opt = (v, text) => `<label class="opt"><input type="radio" name="clm" value="${v}"${state.clm === v ? " checked" : ""}> <span>${text}</span></label>`;
   app.innerHTML = `
     <h1 class="title" tabindex="-1" data-focus>How enforced are your contracts?</h1>
-    <p class="lede">Score your own contract process against the ${QS.length} weak spots in the article. Answer for how things work today, not how the system is supposed to work.</p>
-    <p class="meta">${QS.length} questions on ${PAGES} pages, about 5 minutes, scored out of 100.</p>
-    <ul class="areas">
-      ${DATA.groups.map(g => `
-        <li><span>${esc(g.name)}</span><span class="n">${g.items.length} questions</span><span class="w">${g.weight}%</span></li>`).join("")}
+    <p class="lede">Score your own contract process against the ${SPOTS.length} weak spots in the article. Answer for how things work today, not how the system is supposed to work.</p>
+    <p class="meta">${introMeta()}</p>
+    <ul class="areas">${areas}
     </ul>
     <p class="tip">Reading the article first gives you better context for these questions. <a href="index.html">Read the article</a></p>
+    <fieldset class="clmq">
+      <legend>Do you use a contract management system (CLM)?</legend>
+      ${opt("yes", "Yes, we have a CLM")}
+      ${opt("no", "No, our contracts live in shared drives, email, or the ERP")}
+    </fieldset>
+    <p class="err" id="clmerr" role="alert" hidden>Pick one first. It decides which questions you get.</p>
     <div class="btnrow">${buttons}</div>
     <p class="fine" style="margin-top:22px">Your answers stay in this browser. Nothing is sent anywhere.</p>`;
-  const on = (id, fn) => { const el = document.getElementById(id); if (el) el.addEventListener("click", fn); };
+
+  app.querySelectorAll('input[name="clm"]').forEach(r => r.addEventListener("change", () => {
+    state.clm = r.value;
+    state.page = 0;
+    save();
+    renderIntro();
+    const el = app.querySelector(`input[name="clm"][value="${state.clm}"]`);
+    if (el) el.focus({ preventScroll: true });
+  }));
+  const needClm = () => {
+    if (state.clm) return true;
+    document.getElementById("clmerr").hidden = false;
+    const r = app.querySelector('input[name="clm"]');
+    r.focus({ preventScroll: true });
+    r.closest("fieldset").scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" });
+    return false;
+  };
+  const on = (id, fn) => { const el = document.getElementById(id); if (el) el.addEventListener("click", () => { if (needClm()) fn(); }); };
   on("start", () => { state.page = 0; state.screen = "page"; render(); });
   on("resume", () => { state.page = Math.floor(firstOpen / PER_PAGE); state.screen = "page"; render(); });
   on("seeResult", () => { state.screen = "result"; render(); });
@@ -356,21 +417,21 @@ function renderIntro() {
 }
 
 function progressHtml() {
-  return Array.from({ length: PAGES }, (_, k) => {
-    const [s, e] = pageRange(k);
-    const done = state.answers.slice(s, e).filter(a => a != null).length;
-    return `<div class="seg"><span style="width:${done / (e - s) * 100}%"></span></div>`;
+  return Array.from({ length: pageCount() }, (_, k) => {
+    const items = pageItems(k);
+    const done = items.filter(i => state.answers[i] != null).length;
+    return `<div class="seg"><span style="width:${done / items.length * 100}%"></span></div>`;
   }).join("");
 }
 
-function questionHtml(i) {
+function questionHtml(i, num) {
   const q = QS[i];
   const a = state.answers[i];
   const set = isVal(a);
   const v = set ? a : 0;
   return `
     <div class="q${a === "u" ? " isunsure" : ""}" id="q${i}" data-i="${i}">
-      <p class="qt" id="qt${i}"><span class="qn">${i + 1}.</span><span>${esc(q.q)}</span></p>
+      <p class="qt" id="qt${i}"><span class="qn">${num}.</span><span>${esc(q.q)}</span></p>
       <div class="scale${set ? "" : " unset"}" style="--v:${v}">
         <div class="rail"><span class="fill"></span>${STOPS.map((_, t) => `<span class="tick${set && t <= v ? " on" : ""}" style="--t:${t}"></span>`).join("")}</div>
         <input type="range" min="0" max="3" step="1" value="${v}" aria-labelledby="qt${i}" aria-valuetext="${set ? STOPS[v] : (a === "u" ? "Not sure" : "Not answered")}">
@@ -384,18 +445,23 @@ function questionHtml(i) {
 }
 
 function renderPage() {
-  const p = state.page;
-  const [start, end] = pageRange(p);
+  const pages = pageCount();
+  const p = Math.min(state.page, pages - 1);
+  state.page = p;
+  const items = pageItems(p);
+  const start = p * PER_PAGE;
+  const total = active().length;
+  const numOf = i => start + items.indexOf(i) + 1;
   let qs = "";
   let lastG = -1;
-  for (let i = start; i < end; i++) {
+  items.forEach(i => {
     if (QS[i].gi !== lastG) { qs += `<h3 class="grp">${esc(DATA.groups[QS[i].gi].name)}</h3>`; lastG = QS[i].gi; }
-    qs += questionHtml(i);
-  }
+    qs += questionHtml(i, numOf(i));
+  });
   app.innerHTML = `
     <div class="qhead">
-      <h2 class="pg" tabindex="-1" data-focus>Page ${p + 1} of ${PAGES}</h2>
-      <span class="count">Questions ${start + 1} to ${end} of ${QS.length}</span>
+      <h2 class="pg" tabindex="-1" data-focus>Page ${p + 1} of ${pages}</h2>
+      <span class="count">Questions ${start + 1} to ${start + items.length} of ${total}</span>
     </div>
     <div class="progress" aria-hidden="true">${progressHtml()}</div>
     ${p === 0 ? `<p class="howto">Slide each one to the answer that fits how things work today. Tick Not sure if you don't know.</p>` : ""}
@@ -403,7 +469,7 @@ function renderPage() {
     <p class="err" id="err" role="alert" hidden></p>
     <div class="pagefoot">
       <button class="textbtn" id="back">Back</button>
-      <button class="primary" id="next">${p === PAGES - 1 ? "See my result" : "Next page"}</button>
+      <button class="primary" id="next">${p === pages - 1 ? "See my result" : "Next page"}</button>
     </div>`;
 
   app.querySelectorAll(".q").forEach(el => wireQuestion(el, Number(el.dataset.i)));
@@ -412,12 +478,11 @@ function renderPage() {
     save(); render();
   });
   document.getElementById("next").addEventListener("click", () => {
-    const missing = [];
-    for (let i = start; i < end; i++) if (state.answers[i] == null) missing.push(i);
+    const missing = items.filter(i => state.answers[i] == null);
     app.querySelectorAll(".q").forEach(el => el.classList.toggle("missing", missing.includes(Number(el.dataset.i))));
     const err = document.getElementById("err");
     if (missing.length) {
-      const nums = missing.map(i => i + 1);
+      const nums = missing.map(numOf);
       err.textContent = (nums.length === 1 ? `Question ${nums[0]} needs` : `Questions ${listNums(nums)} need`) + " an answer. Slide to one, or tick Not sure.";
       err.hidden = false;
       const first = document.querySelector(`#q${missing[0]} input[type="range"]`);
@@ -425,7 +490,7 @@ function renderPage() {
       document.getElementById(`q${missing[0]}`).scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" });
       return;
     }
-    if (p === PAGES - 1) state.screen = "result"; else state.page++;
+    if (p === pages - 1) state.screen = "result"; else state.page++;
     save(); render();
   });
 }
@@ -480,17 +545,26 @@ function paint(el, i) {
 function renderResult() {
   const score = Math.round(totalScore());
   const L = levelFor(score);
-  const unsure = state.answers.filter(a => a === "u").length;
-  const gaps = QS.map((q, i) => ({ q, lost: q.weight - pts(i) }))
-    .filter(x => x.lost > 0.001)
-    .sort((a, b) => b.lost - a.lost || b.q.weight - a.q.weight)
+  const act = active();
+  const unsure = act.filter(i => state.answers[i] === "u").length;
+  const skipped = QS.filter((_, i) => !applies(i));
+  const skippedW = skipped.reduce((s, q) => s + q.weight, 0);
+
+  // Points lost per weak spot, counting only the questions that were asked.
+  // Skipped CLM questions are covered by the note below instead.
+  const gaps = SPOTS.map((s, si) => {
+    let got = 0, of = 0;
+    QS.forEach((q, i) => { if (q.si === si && applies(i)) { got += pts(i); of += q.weight; } });
+    return { s, of, lost: of - got };
+  }).filter(x => x.of > 0 && x.lost > 0.001)
+    .sort((a, b) => b.lost - a.lost || b.s.weight - a.s.weight)
     .slice(0, 3);
 
   const bars = DATA.groups.map((g, gi) => {
     const s = Math.round(groupScore(gi));
     const c = levelFor(s).color;
     return `<li>
-      <span class="name">${esc(g.name)}<small>${g.weight}% of score</small></span>
+      <span class="name">${esc(g.name)}<small>${g.weight}% of score${groupSkipped(gi) ? ", skipped without a CLM" : ""}</small></span>
       <span class="val">${s}</span>
       <span class="track" aria-hidden="true"><span class="fill" style="width:${s}%; --c: var(${c})"></span></span>
     </li>`;
@@ -498,13 +572,15 @@ function renderResult() {
 
   const gapHtml = gaps.length ? `<ol class="gaps">${gaps.map(x => `
       <li>
-        <p class="gname">${esc(x.q.issue)}</p>
-        <p class="glost">Lost ${one(x.lost)} of ${x.q.weight} points</p>
-        <p class="gfix">What helps: ${esc(x.q.remedy)}</p>
+        <p class="gname">${esc(x.s.issue)}</p>
+        <p class="glost">Lost ${one(x.lost)} of ${one(x.of)} points</p>
+        <p class="gfix">What helps: ${esc(x.s.remedy)}</p>
       </li>`).join("")}</ol>`
     : `<p>No gaps. Every answer was a full yes.</p>`;
 
   const unsureHtml = unsure ? `<p class="note">You answered Not sure on ${unsure} ${unsure === 1 ? "question" : "questions"}, and those count as zero. If nobody knows whether something is happening, it usually is not.</p>` : "";
+
+  const noClmHtml = state.clm === "no" ? `<p class="note">You don't have a CLM, so ${skipped.length} questions about CLM features were skipped. They count as zero, which puts ${one(skippedW)} of the 100 points out of reach. If you are choosing a CLM, <a href="index.html#gap-by-gap">the ${SPOTS.length} weak spots in the article</a> make a good checklist for vendor demos.</p>` : "";
 
   app.innerHTML = `
     <p class="site">Your result</p>
@@ -521,6 +597,7 @@ function renderResult() {
     <h2 class="sec">Your biggest gaps</h2>
     ${gapHtml}
     ${unsureHtml}
+    ${noClmHtml}
 
     <h2 class="sec">What the research says</h2>
     <p>World Commerce &amp; Contracting and Deloitte estimate that the average organization loses ${pct(STUDY.avg)} of contract value. The best performers lose a little over ${pct(STUDY.top)}, and the worst more than ${pct(STUDY.worst)}. The estimate draws on 1,236 organizations, and the study notes that some loss can't be avoided, such as early terminations and changes in requirements.</p>
@@ -536,7 +613,7 @@ function renderResult() {
       <button class="secondary" id="retake">Retake the survey</button>
       <button class="textbtn" id="edit">Change my answers</button>
     </div>
-    <p class="fine" style="margin-top:28px">Scoring weights reflect the author's field judgment. <a href="index.html#weights">How the weights work</a>. Study source: <a href="${STUDY.url}" target="_blank" rel="noopener">World Commerce &amp; Contracting and Deloitte, "The ROI of Contracting Excellence" (2023)</a>.</p>`;
+    <p class="fine" style="margin-top:28px">Scoring weights reflect the author's field judgment. When a weak spot has more than one question, its weight is split evenly across them. <a href="index.html#weights">How the weights work</a>. Study source: <a href="${STUDY.url}" target="_blank" rel="noopener">World Commerce &amp; Contracting and Deloitte, "The ROI of Contracting Excellence" (2023)</a>.</p>`;
 
   const spend = document.getElementById("spend");
   const out = document.getElementById("calcout");

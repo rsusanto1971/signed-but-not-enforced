@@ -191,18 +191,15 @@ button { font: inherit; cursor: pointer; }
 
 .note { background: var(--pen-soft); padding: 14px 16px; border-radius: 3px; font-size: 15px; }
 
-.calc { margin: 18px 0 8px; }
-.calc label { display: block; font-weight: 600; font-size: 15px; margin-bottom: 6px; }
-.calc input {
-  font: inherit; width: 100%; max-width: 320px;
-  padding: 11px 14px;
-  border: 1px solid var(--muted);
-  border-radius: 3px;
-  background: var(--sheet);
-  color: var(--ink);
-}
-.calcout { margin-top: 12px; min-height: 1.5em; }
-.calcout strong { font-size: 19px; }
+.glab { display: block; margin: 12px 0 2px; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.gtxt { margin: 0; max-width: 62ch; }
+.more { margin: 0; padding-left: 1.4em; }
+.more li { margin-bottom: 14px; padding-left: 4px; max-width: 62ch; }
+.more li::marker { font-weight: 700; }
+.plan { margin: 0; padding-left: 1.4em; }
+.plan li { margin-bottom: 12px; padding-left: 4px; max-width: 62ch; }
+.plan li::marker { font-weight: 700; }
+.area-read { margin: 0 0 14px; max-width: 62ch; }
 .actions { margin-top: 40px; }
 
 @media (prefers-reduced-motion: reduce) {
@@ -261,6 +258,216 @@ const LEVELS = [
   { min: 0, n: 1, name: "Signed, not enforced", color: "--l1",
     text: "Contracts get signed and stored, and that is mostly where it ends. Terms rarely reach POs, invoices, or renewals, so negotiated value leaks after signature." }
 ];
+
+// Expert notes for the results page. Written once, shown as is. Nothing is sent anywhere.
+// w: why it matters, m: first move in 30 days, k: how to measure it, o: who owns it, a: what to ask your team or vendor.
+const EXPERT = {
+  "Manual renewals and price increases": {
+    w: "A missed notice date locks you into another term. An unchecked increase quietly resets your price. Both hit the P&L directly, and both are avoidable.",
+    m: "Pull every contract that renews in the next 12 months with its notice date and price cap. Put the ones inside 90 days on one list, each with a named owner.",
+    k: "Share of renewals started before the notice deadline. Dollars of price increases stopped or reduced.",
+    o: "Category manager, with procurement operations running the calendar.",
+    a: "A supplier asks for 10% on a contract capped at 2.5%. Who gets warned, and when?" },
+  "No obligation and SLA tracking": {
+    w: "Service credits, audit rights, and delivery commitments only pay out if someone notices a miss. Without tracking, the supplier never has to raise it.",
+    m: "Take your 20 largest services contracts. List the SLAs and credits in each, and give each contract one owner who reviews performance every month.",
+    k: "Service credits claimed as a share of credits earned. Obligations with a named owner.",
+    o: "The business owner of each contract, with procurement as the backstop.",
+    a: "How are obligations pulled out of the contract, who is alerted on a miss, and who starts the credit claim?" },
+  "No invoice-to-contract validation": {
+    w: "This is where the negotiated price meets payment. If invoice lines are not checked against the contract, discounts and caps stay on paper.",
+    m: "Sample 100 recent invoices from your top 10 suppliers by spend. Compare unit price, discount, and payment terms line by line to the contract. The mismatch rate sizes the problem.",
+    k: "Invoice lines paid at a price that differs from the contract. Dollars recovered.",
+    o: "Accounts payable lead and procurement operations, together.",
+    a: "Does the system compare invoice lines to the contract, or only to the PO? What happens to an exception?" },
+  "Rebates, tiers, and commitments not tracked": {
+    w: "Volume rebates and tier discounts are earned by spend that nobody totals. A missed commitment can trigger a shortfall fee. Both stay hidden without a running total.",
+    m: "List every contract with a rebate, a tier, or a minimum commitment. Once a quarter, total spend by supplier and compare it to each threshold.",
+    k: "Rebates earned versus rebates claimed. Commitment shortfalls caught before year end.",
+    o: "Category manager, with finance confirming the numbers.",
+    a: "Can you track running spend against each tier and warn me 90 days before a threshold is missed?" },
+  "No contract-to-spend link": {
+    w: "If you cannot tie spend to a contract, you cannot see what is off contract. Tail spend and maverick buying hide here.",
+    m: "Match last year's AP spend to your contract list by supplier. Flag every supplier with real spend and no active contract.",
+    k: "Share of spend under contract. Suppliers above a spend threshold with no contract.",
+    o: "Procurement operations or spend analytics.",
+    a: "How does spend get matched to a contract record, and how clean does the supplier data need to be?" },
+  "Policy not enforced": {
+    w: "A policy that depends on people reading it loses to the easiest path. Buyers go around a hard process every time.",
+    m: "Find the top three ways spend gets around your process. Make the compliant route the easiest one, for example a guided request form with preferred suppliers.",
+    k: "Spend raised after the fact, such as a PO created after the invoice. Requests started in the front door.",
+    o: "Head of procurement, with finance as sponsor.",
+    a: "Can the business start a request in one place, and does it route to the right contract and supplier on its own?" },
+  "No bulk amendment": {
+    w: "A tariff, a regulation, or a rate change lands on hundreds of contracts at once. Fixing them one by one is slow, so some never get fixed.",
+    m: "Write down the next change you would need to roll out, such as a data clause or a rate. Find out how long it would take today just to list the contracts it touches.",
+    k: "Days from the decision to every affected contract amended.",
+    o: "Legal operations, with procurement.",
+    a: "If I need to change one clause in 500 contracts, how do I find them, and how do I amend them as a group?" },
+  "No savings tracking": {
+    w: "Savings that are not tracked from budget to final contract value are hard to defend to the CFO. Finance discounts what it cannot trace.",
+    m: "Agree one definition of savings with finance. Record the budget or prior price at intake and the signed value at award for every sourcing event.",
+    k: "Savings that finance has confirmed, as a share of savings reported.",
+    o: "Procurement finance partner.",
+    a: "How does the system compare the signed price to the budget or prior price, and can finance see it?" },
+  "Drafting not tied to the playbook": {
+    w: "Every unplanned edit to standard terms is a risk someone has to review later. A clause library cuts that work and makes deviations visible.",
+    m: "Take your five most common agreement types. Write preferred, fallback, and walk-away wording for the ten clauses that get negotiated most.",
+    k: "Share of contracts signed on standard paper. Days in legal review.",
+    o: "Legal, with procurement setting the commercial positions.",
+    a: "How does the system flag a departure from our standard clause while a buyer is editing?" },
+  "Manual negotiation prep": {
+    w: "Buyers walk into negotiations with partial history, because pulling spend, performance, and past terms takes hours. Better prep tends to show up in the price.",
+    m: "Build a one-page brief template with spend, price history, performance, open issues, and key terms. Use it on the next five negotiations and note how long it takes.",
+    k: "Hours of prep per negotiation. Share of negotiations that use the brief.",
+    o: "Category manager.",
+    a: "Can the system build a negotiation brief from our own contract, spend, and performance data? Does each fact show its source?" },
+  "Negotiation outside the CLM": {
+    w: "Redlines in email leave no clean record of what was asked, given, or agreed. The audit trail and the version of record both suffer.",
+    m: "Ask buyers to keep all redlines on one shared document with tracked changes. File the negotiation history with the signed contract.",
+    k: "Contracts with a complete negotiation history on file.",
+    o: "Legal operations.",
+    a: "Can suppliers redline in a shared workspace, and does the history stay with the contract?" },
+  "No risk-based approval routing": {
+    w: "Routing by dollar value alone sends a harmless renewal and a risky deviation through the same queue. The risky one gets the same quick look.",
+    m: "Define three tiers by value, clause deviation, and supplier risk. Give low-risk contracts a fast track with a named approver.",
+    k: "Approval cycle time by tier. Low-risk contracts approved on the fast track.",
+    o: "Legal and procurement leadership.",
+    a: "Can I route approvals on clause deviation and supplier risk, not only on amount?" },
+  "Rigid workflow": {
+    w: "When the workflow cannot change, the business works around it. Every workaround is spend the system never sees.",
+    m: "List the three workflow changes the business asked for in the last year. Find out who can make them and how long each would take.",
+    k: "Days to change a workflow. Change requests waiting.",
+    o: "Procurement operations.",
+    a: "Can a procurement admin change a workflow without IT or the vendor? Show me." },
+  "Manual signature process": {
+    w: "Printing, scanning, and chasing signatures adds days to every contract, and the signed copy can end up in an inbox instead of the record.",
+    m: "Count how many contracts still get signed on paper. Whatever the tool, file the signed copy to the contract record the same day.",
+    k: "Days from final approval to signature. Signed copies filed within a day.",
+    o: "Legal operations.",
+    a: "Does signing start from the contract record, and does the signed copy return to it on its own?" },
+  "No downstream integration": {
+    w: "If contract prices and terms do not reach the PO, the buyer keys them by hand, and the contract is enforced only when people remember.",
+    m: "Take your top 20 contracts by spend. Load their prices into the catalog or PO system by hand if you must, then check that POs match.",
+    k: "POs that match the contract price at creation. Manual price changes on POs.",
+    o: "Procurement operations and the P2P system owner.",
+    a: "How do contract prices and terms get into the PO, and who maintains the link when a contract changes?" },
+  "No upstream integration": {
+    w: "Request, budget, and award data sit in intake and sourcing tools. If they do not flow into the contract, people re-key them and errors enter on day one.",
+    m: "Map the fields a buyer re-keys when drafting a contract. Start by passing the supplier, value, and dates from the award.",
+    k: "Fields re-keyed per contract. Contracts created from an award record.",
+    o: "Sourcing lead, with the CLM owner.",
+    a: "What data comes from intake and sourcing into the draft contract, and what do buyers still type?" },
+  "No financial data integration": {
+    w: "Without categories, cost centers, and accounting fields from the ERP, the contract cannot support reporting or budget checks. The data is typed in and drifts.",
+    m: "Give the contract record a drop-down for category and cost center that comes from one ERP list. Stop free text for those fields.",
+    k: "Contracts with a valid category and cost center.",
+    o: "Finance systems and procurement operations.",
+    a: "How are ERP categories, cost centers, and accounting fields kept in sync with the contract?" },
+  "No supplier risk and performance data": {
+    w: "A renewal decision made without risk and performance data is a decision made on memory. The data exists, but not where the buyer is looking.",
+    m: "Before each renewal over a spend threshold, attach the supplier's latest risk rating and performance scorecard to the renewal request.",
+    k: "Renewals decided with current risk and performance data.",
+    o: "Supplier management.",
+    a: "Do risk scores and performance data show on the contract record, and how often do they refresh?" },
+  "No employee data integration": {
+    w: "Owners leave, teams reorganize, and the approval chain breaks. Contracts end up owned by someone who is no longer there.",
+    m: "Check your contract owners against the current employee list. Reassign every contract whose owner has left.",
+    k: "Contracts with a current, active owner.",
+    o: "Procurement operations, with HR.",
+    a: "Does the system read roles and reporting lines from HR, and what happens to a contract when its owner leaves?" },
+  "Disconnected processes": {
+    w: "Nobody can see where a request is stuck between intake and a signed contract. Delays and workarounds hide in the handoffs.",
+    m: "Follow one request from intake to signature. Write down every handoff, who owns it, and how long the request waited.",
+    k: "Days from request to signed contract. Handoffs with a named owner.",
+    o: "Head of procurement operations.",
+    a: "Can I see one request from intake through sourcing, contract, and signature in a single view?" },
+  "Inaccurate data extraction": {
+    w: "Everything built on extracted dates, amounts, and renewal terms is only as good as the extraction. A wrong renewal field means a missed notice.",
+    m: "Test on 50 contracts you know well. Compare the extracted start date, end date, amount, and renewal terms to the contract, and measure accuracy field by field.",
+    k: "Accuracy by field. Share of key fields confirmed by a person.",
+    o: "Procurement operations.",
+    a: "What accuracy do you see on dates, amounts, and renewal terms for contracts like ours, and can I test it on mine?" },
+  "Inaccurate vendor data": {
+    w: "Duplicate or mismatched suppliers split spend across records. Spend, risk, and contract reports then all undercount the real exposure.",
+    m: "Pull your top 100 suppliers by spend. Check each contract's supplier name against the vendor master and fix the mismatches.",
+    k: "Contracts linked to the correct vendor record. Duplicate vendor records.",
+    o: "Vendor master data owner.",
+    a: "How does the system match contracts to vendor master records, and how are mismatches reported?" },
+  "No parent-child linkage": {
+    w: "An amendment or SOW read alone can miss terms that the master agreement changes. Without the link, people apply the wrong price or term.",
+    m: "For your top 20 suppliers, link every SOW, amendment, and order form to its master agreement.",
+    k: "Child agreements linked to a parent.",
+    o: "Contract administrators.",
+    a: "How are amendments and SOWs linked to the master agreement, and can I see the whole family in one place?" },
+  "Slow legacy migration": {
+    w: "Older contracts in shared drives and inboxes sit outside every control. Renewals on them are the ones most likely to be missed.",
+    m: "Load the contracts that renew in the next 18 months first. Leave the rest for a second pass.",
+    k: "Contracts in the repository as a share of total. Renewals in the next 18 months fully loaded.",
+    o: "Procurement operations.",
+    a: "How fast can you bulk load, and how is low-confidence data sent for review?" },
+  "Limited search": {
+    w: "If you cannot find every contract with a given clause, you cannot answer a regulator, a CFO, or a supplier price request in time.",
+    m: "Pick three questions you were asked this year, such as every contract with auto-renewal or a price cap. Time how long each takes to answer.",
+    k: "Hours to answer a question across contracts.",
+    o: "Legal operations.",
+    a: "Can I search by clause text and by field together, across all contracts, and export the result?" },
+  "No AI insights": {
+    w: "Reading contracts one by one does not scale. The questions across the whole repository are where most of the value sits.",
+    m: "Choose five questions you would like to ask the whole repository. Test any tool on them with your own contracts before you buy.",
+    k: "Questions answered per week without legal. Share of answers a person checks.",
+    o: "Procurement operations, with legal.",
+    a: "Can I ask a question across the full repository and see the clause behind each part of the answer?" },
+  "Poor user experience": {
+    w: "If the screens are hard to use, the business emails the contract. The system holds the old version while the real one sits in an inbox.",
+    m: "Watch three business users try a common task. Cut the steps where they get stuck.",
+    k: "Share of requests started in the system. Steps for the most common task.",
+    o: "Procurement operations.",
+    a: "Show me the three most common tasks for a business user. How many clicks does each take?" },
+  "Users prefer general AI tools": {
+    w: "Buyers use general AI tools because they can combine documents and notes in one place. Contract data then leaves your control, and the system's own data gets worse.",
+    m: "Ask your sourcing team what they use general AI for. Set a clear policy and give them an approved route for the same task.",
+    k: "Staff using approved tools for contract analysis.",
+    o: "Head of procurement, with IT and security.",
+    a: "Can users add outside documents and notes to a contract analysis inside the system, under our access controls?" },
+  "No traceability for AI answers": {
+    w: "An answer nobody can check is an answer nobody trusts. People then re-read the contract by hand, and the AI saves no time.",
+    m: "Make a rule that no AI answer is used in a decision unless it points to the clause. Track how often a person has to correct one.",
+    k: "AI answers with a source clause. Corrections per 100 answers.",
+    o: "Legal operations.",
+    a: "Does every answer link to the exact clause, with a confidence level and a review step?" },
+  "Slow time to value": {
+    w: "A tool that takes a year to configure loses its sponsors. Value that shows up in 90 days earns the next budget.",
+    m: "Set a 90-day goal tied to one dollar outcome, such as renewals caught, and hold the project to it.",
+    k: "Days to the first measurable result.",
+    o: "The procurement leader who sponsors the tool.",
+    a: "What can procurement configure without IT, and what is a realistic date for the first measurable result?" },
+  "No role-based dashboard": {
+    w: "A buyer, a lawyer, and a CPO need different views. One report for all of them serves none.",
+    m: "Write down the five questions each role asks every week. Build or request one view per role around them.",
+    k: "Dashboards opened each week, by role.",
+    o: "Procurement operations.",
+    a: "Can each role get its own dashboard without a project, and what data can each view use?" }
+};
+
+// What each area score says. Low is below 50.
+const AREA_READ = {
+  "Post Signature (Performance)": {
+    low: "This is the biggest area, at 35% of the score, and it is where money leaves. Terms get signed but are not followed through renewals, invoices, and commitments. Start with a renewal list and an invoice sample before you buy anything.",
+    ok: "Follow-through after signature is in decent shape. The risk that remains sits in the edge cases: multi-year POs, rebates, and supplier-requested increases. Keep sampling invoices against contracts to catch drift." },
+  "Creation & Execution": {
+    low: "Drafting and approvals run on habit. This area costs less money than the others, but it feeds them: the clauses and fields set here are what everything after signature depends on. Fix the playbook before the workflow.",
+    ok: "Drafting and approvals are in good shape. Keep the playbook current, since a stale clause library slowly pushes deals off standard paper." },
+  "Integration": {
+    low: "Your systems do not pass contract terms along, so people carry them by hand. Fix this early, because obligation tracking, invoice checks, and renewals all depend on it. Automation on top of disconnected systems only delivers the wrong answer faster.",
+    ok: "Most of the chain is connected. Look for the handoffs that still depend on a person, usually the ERP fields and owner changes." },
+  "Data and repository": {
+    low: "The data under everything is not reliable yet. Wrong dates, mismatched suppliers, and contracts in shared drives weaken every report and alert. Test accuracy on a sample before you trust any dashboard.",
+    ok: "The data is mostly dependable. Keep a regular accuracy check on the key fields, since quality drifts as new contracts arrive." },
+  "Adoption and trust": {
+    low: "People are working around the system. When the business cannot use or trust the tool, it moves to email and general AI tools, and the data gets worse. Fix the experience for the top three tasks first.",
+    ok: "People use the system and trust it. Protect that by showing the source behind every AI answer and keeping the screens simple." }
+};
 
 const STUDY = {
   avg: 0.086, top: 0.03, worst: 0.20,
@@ -552,13 +759,26 @@ function renderResult() {
 
   // Points lost per weak spot, counting only the questions that were asked.
   // Skipped CLM questions are covered by the note below instead.
-  const gaps = SPOTS.map((s, si) => {
+  const allGaps = SPOTS.map((s, si) => {
     let got = 0, of = 0;
     QS.forEach((q, i) => { if (q.si === si && applies(i)) { got += pts(i); of += q.weight; } });
     return { s, of, lost: of - got };
   }).filter(x => x.of > 0 && x.lost > 0.001)
-    .sort((a, b) => b.lost - a.lost || b.s.weight - a.s.weight)
-    .slice(0, 3);
+    .sort((a, b) => b.lost - a.lost || b.s.weight - a.s.weight);
+  const gaps = allGaps.slice(0, 3);
+  const more = allGaps.slice(3, 6);
+
+  // Area scores, leaving out areas skipped without a CLM.
+  const areas = DATA.groups.map((g, gi) => ({ name: g.name, score: groupScore(gi), skipped: groupSkipped(gi) })).filter(a => !a.skipped);
+  const byLow = areas.slice().sort((a, b) => a.score - b.score);
+  const weakest = byLow.slice(0, 2);
+  const strongest = byLow[byLow.length - 1];
+  const evenAreas = areas.length > 0 && strongest.score - byLow[0].score < 5;
+  const execRead = !areas.length ? "" : evenAreas ? "Your area scores are close to each other, so no single area stands out." : `${esc(strongest.name)} is your strongest area, at ${Math.round(strongest.score)}. ${esc(byLow[0].name)} is your weakest, at ${Math.round(byLow[0].score)}.${byLow[0].name === "Integration" || (weakest[1] && weakest[1].name === "Integration" && weakest[1].score < 50) ? " Connect the chain before you add more automation, because the other fixes depend on it." : ""}`;
+  const areaReadHtml = (evenAreas || !allGaps.length ? [] : weakest).map(a => {
+    const t = AREA_READ[a.name];
+    return t ? `<p class="area-read"><strong>${esc(a.name)} (${Math.round(a.score)}).</strong> ${esc(a.score < 50 ? t.low : t.ok)}</p>` : "";
+  }).join("");
 
   const bars = DATA.groups.map((g, gi) => {
     const s = Math.round(groupScore(gi));
@@ -570,13 +790,41 @@ function renderResult() {
     </li>`;
   }).join("");
 
-  const gapHtml = gaps.length ? `<ol class="gaps">${gaps.map(x => `
+  const gapHtml = gaps.length ? `<ol class="gaps">${gaps.map(x => {
+      const ex = EXPERT[x.s.issue];
+      const extra = ex ? `
+        <span class="glab">Why it matters</span><p class="gtxt">${esc(ex.w)}</p>
+        <span class="glab">What helps</span><p class="gfix">${esc(x.s.remedy)}</p>
+        <span class="glab">Your first move, in 30 days</span><p class="gtxt">${esc(ex.m)}</p>
+        <span class="glab">How to measure it</span><p class="gtxt">${esc(ex.k)}</p>
+        <span class="glab">Who should own it</span><p class="gtxt">${esc(ex.o)}</p>
+        <span class="glab">Ask your team or vendor</span><p class="gtxt">${esc(ex.a)}</p>`
+        : `<p class="gfix">What helps: ${esc(x.s.remedy)}</p>`;
+      return `
       <li>
         <p class="gname">${esc(x.s.issue)}</p>
-        <p class="glost">Lost ${one(x.lost)} of ${one(x.of)} points</p>
-        <p class="gfix">What helps: ${esc(x.s.remedy)}</p>
-      </li>`).join("")}</ol>`
+        <p class="glost">Lost ${one(x.lost)} of ${one(x.of)} points</p>${extra}
+      </li>`;
+    }).join("")}</ol>`
     : `<p>No gaps. Every answer was a full yes.</p>`;
+
+  // Several of the heaviest gaps often come from one cause: contract terms never reach the PO and invoice.
+  const rootNames = { "No downstream integration": "downstream integration", "No invoice-to-contract validation": "invoice validation", "No contract-to-spend link": "the contract-to-spend link" };
+  const rootHits = allGaps.filter(x => rootNames[x.s.issue] && x.lost / x.of >= 0.4).map(x => rootNames[x.s.issue]);
+  const patternHtml = rootHits.length >= 2 ? `<p class="note">Your gaps in ${rootHits.length === 2 ? rootHits.join(" and ") : rootHits.slice(0, -1).join(", ") + ", and " + rootHits[rootHits.length - 1]} often share one root cause: contract terms never reach the PO and the invoice. Fixing that connection once can lift all of them, so plan it as one project instead of ${rootHits.length}.</p>` : "";
+
+  const moreHtml = more.length ? `<h2 class="sec">Also worth a look</h2>
+    <ol class="more">${more.map(x => {
+      const ex = EXPERT[x.s.issue];
+      return `<li><strong>${esc(x.s.issue)}.</strong> ${esc(ex ? ex.m : x.s.remedy)}</li>`;
+    }).join("")}</ol>` : "";
+
+  const planHtml = gaps.length ? `<h2 class="sec">Your next 90 days</h2>
+    <ol class="plan">
+      <li><strong>Days 1 to 30. Measure.</strong> Run the first move on your top ${gaps.length === 1 ? "gap" : gaps.length + " gaps"} and write down a baseline for each measure.</li>
+      <li><strong>Days 31 to 60. Fix what needs no new tool.</strong> Name an owner for each gap, then clean up the lists, the owners, and the sample checks first.</li>
+      <li><strong>Days 61 to 90. Decide on tools.</strong> ${state.clm === "no" ? "Use the questions above as a checklist in vendor demos." : "Put the questions above to your current vendor."} Take the dollars you found to your CFO.</li>
+    </ol>` : "";
 
   const unsureHtml = unsure ? `<p class="note">You answered Not sure on ${unsure} ${unsure === 1 ? "question" : "questions"}, and those count as zero. If nobody knows whether something is happening, it usually is not.</p>` : "";
 
@@ -590,22 +838,23 @@ function renderResult() {
     </div>
     <h1 class="level" tabindex="-1" data-focus>Level ${L.n} of 4: ${esc(L.name)}</h1>
     <p>${esc(L.text)}</p>
+    ${execRead ? `<p>${execRead}</p>` : ""}
 
     <h2 class="sec">By area</h2>
     <ul class="bars">${bars}</ul>
+    ${areaReadHtml ? `<h2 class="sec">What your area scores say</h2>${areaReadHtml}` : ""}
 
     <h2 class="sec">Your biggest gaps</h2>
     ${gapHtml}
+    ${patternHtml}
     ${unsureHtml}
     ${noClmHtml}
 
+    ${moreHtml}
+    ${planHtml}
+
     <h2 class="sec">What the research says</h2>
     <p>World Commerce &amp; Contracting and Deloitte estimate that the average organization loses ${pct(STUDY.avg)} of contract value. The best performers lose a little over ${pct(STUDY.top)}, and the worst more than ${pct(STUDY.worst)}. The estimate draws on 1,236 organizations, and the study notes that some loss can't be avoided, such as early terminations and changes in requirements.</p>
-    <div class="calc">
-      <label for="spend">Your annual spend under contract, in US dollars</label>
-      <input id="spend" inputmode="decimal" autocomplete="off" placeholder="50,000,000">
-      <p class="calcout" id="calcout" aria-live="polite"></p>
-    </div>
     <p class="fine">The study does not link loss rates to scores like this one, so your score is not turned into a dollar figure.</p>
 
     <div class="btnrow actions">
@@ -614,14 +863,6 @@ function renderResult() {
       <button class="textbtn" id="edit">Change my answers</button>
     </div>
     <p class="fine" style="margin-top:28px">Scoring weights reflect the author's field judgment. When a weak spot has more than one question, its weight is split evenly across them. <a href="index.html#weights">How the weights work</a>. Study source: <a href="${STUDY.url}" target="_blank" rel="noopener">World Commerce &amp; Contracting and Deloitte, "The ROI of Contracting Excellence" (2023)</a>.</p>`;
-
-  const spend = document.getElementById("spend");
-  const out = document.getElementById("calcout");
-  spend.addEventListener("input", () => {
-    const v = Number(spend.value.replace(/[^0-9.]/g, ""));
-    if (!v || !isFinite(v)) { out.innerHTML = ""; return; }
-    out.innerHTML = `As a rough guide, ${pct(STUDY.avg)} of that is about <strong>${money(v * STUDY.avg)}</strong> a year. Not all of it can be avoided, and not all of it is a contract management problem.`;
-  });
 
   const copyBtn = document.getElementById("copy");
   copyBtn.addEventListener("click", () => {
